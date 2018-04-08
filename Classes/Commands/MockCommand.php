@@ -1,21 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: azat
- * Date: 08.04.18
- * Time: 14:57
- */
 
 namespace app\Commands;
 
+use app\Actions\Action;
+use app\Http\MockHttpRequest;
 
-class MockCommand implements InterfaceCommand
+class MockCommand extends Command implements InterfaceCommand
 {
+    protected $data;
 
-    /**  */
     public static function about()
     {
-        return 'Команда, выполняющий мокинг http-запроса';
+        return 'Команда, выполняющая мокинг http-запроса';
     }
 
     public static function commandName()
@@ -23,13 +19,29 @@ class MockCommand implements InterfaceCommand
         return 'mock';
     }
 
-    public function handleCommand()
+    /**
+     * @param Action $action
+     */
+    public function handleCommand($action)
     {
-        return 0;
+        if ($action){
+            $action->handle($this->data);
+        }
     }
 
-    public function commandDetails()
+    public function beforeAction($params = [])
     {
+        if (empty($params)){
+            $this->commandDetails(self::commandName());
+            return false;
+        }
 
+        $mockReq = new MockHttpRequest('');
+        $value = $mockReq->send();
+        if (is_string($value)) {
+            $value = json_decode($value, true);
+            $this->data = $value['data'];
+        }
+        return true;
     }
 }

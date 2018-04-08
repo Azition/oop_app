@@ -2,12 +2,6 @@
 
 namespace app;
 
-/**
- * Created by PhpStorm.
- * User: azat
- * Date: 08.04.18
- * Time: 13:37
- */
 abstract class Application
 {
     /** @var $factory FactoryCommand */
@@ -24,7 +18,8 @@ abstract class Application
         $this->init();
     }
 
-    protected function init(){
+    protected function init()
+    {
         if ($this->factory === null){
             $this->initFactory();
         }

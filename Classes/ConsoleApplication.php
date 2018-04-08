@@ -1,14 +1,9 @@
 <?php
 
 namespace app;
+use app\Commands\Command;
 use app\Commands\InterfaceCommand;
 
-/**
- * Created by PhpStorm.
- * User: azat
- * Date: 08.04.18
- * Time: 13:47
- */
 class ConsoleApplication extends Application
 {
     protected function showCommandList (){
@@ -32,10 +27,10 @@ class ConsoleApplication extends Application
 
             if (count($argv) === 1){
                 $this->showCommandList();
-            } elseif (count($argv) === 2){
-
-            } else {
-
+            } elseif (count($argv) > 1){
+                /** @var Command $command */
+                $command = $this->factory->getCommand($argv[1]);
+                $command->runAction(array_slice($argv,2));
             }
         }
     }

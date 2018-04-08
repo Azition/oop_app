@@ -30,7 +30,6 @@ class ClassAutoloader
                 return $path;
             }
         }
-
         $path = $this->findFile($class);
         if ($path) {
             includeFile($path);
@@ -60,6 +59,9 @@ class ClassAutoloader
                         return $absPath;
                     }
                 }
+            }
+            if (count($dirList) > 0) {
+                $isFinishFind = false;
             }
         } while(!$isFinishFind);
 
