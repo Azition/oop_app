@@ -9,22 +9,27 @@
 namespace app\Commands;
 
 
-class MockSumCalculateCommand implements InterfaceCommand
+class MockCommand implements InterfaceCommand
 {
 
     /**  */
-    public function about()
+    public static function about()
     {
         return 'Команда, выполняющий мокинг http-запроса';
     }
 
     public static function commandName()
     {
-        return 'mockSumValue';
+        return 'mock';
     }
 
     public function handleCommand()
     {
         return 0;
+    }
+
+    public function commandDetails()
+    {
+
     }
 }

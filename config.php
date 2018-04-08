@@ -3,8 +3,8 @@
 return [
     'factory' => [
         'commands' => [
-            'app\Commands\SumCalculateCommand',
-            'app\Commands\MockSumCalculateCommand',
+            'app\Commands\HttpCommand',
+            'app\Commands\MockCommand',
         ]
     ]
 ];
